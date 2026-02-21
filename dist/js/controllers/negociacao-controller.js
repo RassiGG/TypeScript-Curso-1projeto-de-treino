@@ -1,18 +1,32 @@
 import { Negociacao } from "../models/negociacao.js";
 export class NegociacaoController {
     constructor() {
-        this.inputData = document.querySelector('#data');
-        this.inputQuantidade = document.querySelector('#quantidade');
-        this.inputValor = document.querySelector('#valor');
+        const data = document.querySelector('#data');
+        const quantidade = document.querySelector('#quantidade');
+        const valor = document.querySelector('#valor');
+        if (!data || !quantidade || !valor) {
+            throw new Error('Elemento do formulário não encontrado');
+        }
+        this.inputData = data;
+        this.inputQuantidade = quantidade;
+        this.inputValor = valor;
     }
     adiciona() {
-        if (!this.inputData || !this.inputQuantidade || !this.inputValor) {
-            throw new Error('Um ou mais campos de input não foram encontrados no DOM.');
-        }
-        const data = new Date(this.inputData.value);
+        const negociacao = this.crianegociacao();
+        console.log(negociacao);
+        this.limparformulario();
+    }
+    crianegociacao() {
+        const exp = /-/g;
         const quantidade = parseInt(this.inputQuantidade.value);
         const valor = parseFloat(this.inputValor.value);
-        const negociacao = new Negociacao(data, quantidade, valor);
-        console.log(negociacao);
+        const date = new Date(this.inputData.value.replace(exp, ','));
+        return new Negociacao(date, quantidade, valor);
+    }
+    limparformulario() {
+        this.inputData.value = '';
+        this.inputQuantidade.value = '';
+        this.inputValor.value = '';
+        this.inputData.focus();
     }
 }

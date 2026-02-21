@@ -1,5 +1,8 @@
 export class Negociacao {
     constructor(data, quantidade, valor) {
+        this._data = new Date();
+        this._quantidade = 0;
+        this._valor = 0;
         this._data = data;
         this._quantidade = quantidade;
         this._valor = valor;
