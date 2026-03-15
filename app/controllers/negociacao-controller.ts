@@ -21,7 +21,8 @@ export class NegociacaoController {
         this.inputData = data as HTMLInputElement;
         this.inputQuantidade = quantidade as HTMLInputElement;
         this.inputValor = valor as HTMLInputElement;
-        this.negociacoesView.update();
+        this.negociacoesView.update(this.negociacoes);
+
 
     }
 
@@ -30,7 +31,7 @@ export class NegociacaoController {
         console.log(negociacao);
         this.negociacoes.adiciona(negociacao);
         console.log(this.negociacoes.lista());
-        this.negociacoesView.update();
+        this.negociacoesView.update(this.negociacoes);
         this.limparformulario();
     }
     crianegociacao(): Negociacao{
